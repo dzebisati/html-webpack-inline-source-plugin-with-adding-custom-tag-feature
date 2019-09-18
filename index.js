@@ -4,8 +4,9 @@ var path = require('path');
 var slash = require('slash');
 var sourceMapUrl = require('source-map-url');
 
-function HtmlWebpackInlineSourcePlugin (htmlWebpackPlugin) {
+function HtmlWebpackInlineSourcePlugin(htmlWebpackPlugin, customScriptTagAttributes) {
   this.htmlWebpackPlugin = htmlWebpackPlugin;
+  this.customScriptTagAttributes = customScriptTagAttributes;
 }
 
 HtmlWebpackInlineSourcePlugin.prototype.apply = function (compiler) {
@@ -16,16 +17,16 @@ HtmlWebpackInlineSourcePlugin.prototype.apply = function (compiler) {
     self.htmlWebpackPlugin
       .getHooks(compilation)
       .alterAssetTagGroups.tapAsync('html-webpack-inline-source-plugin', (htmlPluginData, callback) => {
-        if (!htmlPluginData.plugin.options.inlineSource) {
-          return callback(null, htmlPluginData);
-        }
+      if (!htmlPluginData.plugin.options.inlineSource) {
+        return callback(null, htmlPluginData);
+      }
 
-        var regexStr = htmlPluginData.plugin.options.inlineSource;
+      var regexStr = htmlPluginData.plugin.options.inlineSource;
 
-        var result = self.processTags(compilation, regexStr, htmlPluginData);
+      var result = self.processTags(compilation, regexStr, htmlPluginData);
 
-        callback(null, result);
-      });
+      callback(null, result);
+    });
   });
 };
 
@@ -46,7 +47,7 @@ HtmlWebpackInlineSourcePlugin.prototype.processTags = function (compilation, reg
     bodyTags.push(self.processTag(compilation, regex, tag, filename));
   });
 
-  return { headTags: headTags, bodyTags: bodyTags, plugin: pluginData.plugin, outputName: pluginData.outputName };
+  return {headTags: headTags, bodyTags: bodyTags, plugin: pluginData.plugin, outputName: pluginData.outputName};
 };
 
 HtmlWebpackInlineSourcePlugin.prototype.resolveSourceMaps = function (compilation, assetName, asset) {
@@ -86,15 +87,25 @@ HtmlWebpackInlineSourcePlugin.prototype.processTag = function (compilation, rege
   // inline js
   if (tag.tagName === 'script' && tag.attributes && regex.test(tag.attributes.src)) {
     assetUrl = tag.attributes.src;
-    tag = {
-      tagName: 'script',
-      closeTag: true,
-      attributes: {
-        type: 'text/javascript'
+    if (this.customScriptTagAttributes === undefined) {
+      tag = {
+        tagName: 'script',
+        closeTag: true,
+        attributes: {
+          type: 'text/javascript'
+        }
       }
-    };
-
-  // inline css
+    } else {
+      tag = {
+        tagName: 'script',
+        closeTag: true,
+        attributes: {
+          type: 'text/javascript',
+          ...this.customScriptTagAttributes
+        }
+      };
+    }
+    // inline css
   } else if (tag.tagName === 'link' && regex.test(tag.attributes.href)) {
     assetUrl = tag.attributes.href;
     tag = {
@@ -122,7 +133,7 @@ HtmlWebpackInlineSourcePlugin.prototype.processTag = function (compilation, rege
   return tag;
 };
 
-function getAssetByName (assests, assetName) {
+function getAssetByName(assests, assetName) {
   for (var key in assests) {
     if (assests.hasOwnProperty(key)) {
       var processedKey = path.posix.relative('', key);
