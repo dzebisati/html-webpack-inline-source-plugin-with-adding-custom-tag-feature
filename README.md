@@ -1,7 +1,9 @@
 
-Inline Source extension for the HTML Webpack Plugin
+html-webpack-inline-source-plugin with custom script tag attributes
 ========================================
-[![npm version](https://badge.fury.io/js/html-webpack-inline-source-plugin.svg)](https://badge.fury.io/js/html-webpack-inline-source-plugin) [![Build status](https://travis-ci.org/DustinJackson/html-webpack-inline-source-plugin.svg?branch=master)](https://travis-ci.org/DustinJackson/html-webpack-inline-source-plugin) [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+
+Fork of [html-webpack-inline-source-plugin](https://github.com/DustinJackson/html-webpack-inline-source-plugin) by
+[Dustin Jackson](https://github.com/DustinJackson)
 
 Fork features
 ------------

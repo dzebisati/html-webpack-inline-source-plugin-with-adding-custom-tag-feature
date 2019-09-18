@@ -1,7 +1,7 @@
 {
-  "name": "html-webpack-inline-source-plugin",
-  "version": "1.0.0-beta.2",
-  "description": "Embed javascript and css source inline when using the webpack dev server or middleware",
+  "name": "html-webpack-inline-source-plugin-custom-tag-attributes",
+  "version": "1.0.0",
+  "description": "html-webpack-inline-source-plugin with custom script tag attributes",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dustinjackson/html-webpack-inline-source-plugin.git"
+    "url": "https://github.com/dzebisati/html-webpack-inline-source-plugin-with-adding-custom-tag-feature.git"
   },
   "keywords": [
     "webpack",
@@ -25,12 +25,8 @@
     "inline",
     "source"
   ],
-  "author": "Dustin Jackson <dustin.jackson@live.com> (https://github.com/DustinJackson)",
+  "author": "Azamat Dzebisov <dzembo1@yandex.ru> (https://github.com/DustinJackson)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dustinjackson/html-webpack-inline-source-plugin/issues"
-  },
-  "homepage": "https://github.com/dustinjackson/html-webpack-inline-source-plugin",
   "devDependencies": {
     "cheerio": "^0.22.0",
     "css-loader": "^0.25.0",
