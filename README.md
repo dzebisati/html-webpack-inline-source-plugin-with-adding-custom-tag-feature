@@ -1,9 +1,24 @@
+
 Inline Source extension for the HTML Webpack Plugin
 ========================================
 [![npm version](https://badge.fury.io/js/html-webpack-inline-source-plugin.svg)](https://badge.fury.io/js/html-webpack-inline-source-plugin) [![Build status](https://travis-ci.org/DustinJackson/html-webpack-inline-source-plugin.svg?branch=master)](https://travis-ci.org/DustinJackson/html-webpack-inline-source-plugin) [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
 
-Enhances [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin)
-functionality by adding the `{inlineSource: 'regex string'}` option.
+Fork features
+------------
+Too add custom attribute to script tag, in your webpack configuration file
+invoke function 
+
+Install the plugin with npm:
+```javascript
+const myCustomAttributes = {
+    "YourCustomAttribute": 'value',
+     // ... More attributes  
+};
+
+//...
+new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin, myCustomAttributes),
+//...
+```
 
 This is an extension plugin for the [webpack](http://webpack.github.io) plugin [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) (version 4 or higher).  It allows you to embed javascript and css source inline.
 
