@@ -9,8 +9,6 @@
     "index.d.ts"
   ],
   "scripts": {
-    "prepublish": "npm run test",
-    "pretest": "semistandard",
     "test": "jasmine",
     "debug": "node-debug jasmine"
   },
